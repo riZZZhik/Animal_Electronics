@@ -33,6 +33,7 @@ class ARuco:
         corners, ids, _ = aruco.detectMarkers(gray, self._aruco_dict, parameters=self._aruco_parameters)
 
         # Save detected markers to list
+        self.detected_markers = {}
         if len(corners):
             for k in range(len(corners)):
                 temp_1 = corners[k]
