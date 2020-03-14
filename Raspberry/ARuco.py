@@ -77,6 +77,7 @@ class ARuco:
             centre = tuple(centre)
 
             angle = self._angle_calculate(pt1, pt2)
+            
             robot_state[key] = (int(centre[0]), int(centre[1]), angle)
 
         return robot_state
@@ -119,7 +120,7 @@ if __name__ == "__main__":
 
         # Show result frame
         cv.imshow('image', frame)
-        
+
         # Exit if "q" is pressed
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
