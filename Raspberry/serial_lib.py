@@ -13,7 +13,7 @@ class Serial:
         self.ser.write(message.encode("utf-8"))
 
     def send_speeds(self, speeds, angle):
-        speeds = [s + 255 for s in speeds]
+        speeds = [round(s + 255) for s in speeds]
         message = speeds + [angle]
         message = [str(m).zfill(3) for m in message]
         message = " ".join(message)
