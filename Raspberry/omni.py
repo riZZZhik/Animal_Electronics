@@ -1,4 +1,4 @@
-from math import cos, atan2
+from math import atan2, cos
 
 class Omni:
     """Class for getting speeds for omni wheel platform"""
@@ -25,10 +25,10 @@ class Omni:
         :param y: Needed Y position in decart system"""
         alpha = atan2(y, x)
 
-        s1 = self.Kd * cos(alpha + 45)
-        s2 = self.Kd * cos(alpha + 135)
-        s3 = self.Kd * cos(alpha + 225)
-        s4 = self.Kd * cos(alpha + 315)
+        s1 = self.Kd * cos(alpha + 45) * 255
+        s2 = self.Kd * cos(alpha + 135) * 255
+        s3 = self.Kd * cos(alpha + 225) * 255
+        s4 = self.Kd * cos(alpha + 315) * 255
 
         return s1, s2, s3, s4
 
