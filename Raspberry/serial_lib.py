@@ -12,6 +12,14 @@ class Serial:
         """Function for sending data to Arduino"""
         self.ser.write(message.encode("utf-8"))
 
+    def send_speeds(self, speeds, angle):
+        speeds = [s + 255 for s in speeds]
+        message = speeds + [angle]
+        message = [str(m).zfill(3) for m in message]
+        message = " ".join(message)
+
+        self.send(message)
+
     def read(self):
         """Function for reading data from Arduino
         :return: data string from Arduino"""
@@ -23,6 +31,7 @@ class Serial:
 
 if __name__ == "__main__":
     from time import sleep
+
     serial = Serial()
 
     while True:
