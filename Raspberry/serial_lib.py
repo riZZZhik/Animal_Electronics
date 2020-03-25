@@ -17,6 +17,7 @@ class Serial:
         :return: data string from Arduino"""
         if self.ser.in_waiting > 0:
             line = self.ser.readline()
+            line = line.decode('utf-8')
             return line
 
 
@@ -25,7 +26,7 @@ if __name__ == "__main__":
     serial = Serial()
 
     while True:
-        serial.send("TEST TEST TEST")
+        serial.send("255 100 050 010 000")
         sleep(2)
 
         print(serial.read())
