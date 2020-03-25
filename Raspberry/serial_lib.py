@@ -6,7 +6,7 @@ class Serial:
 
     def __init__(self, port='/dev/ttyUSB0'):
         """Initialize serial variables"""
-        self.ser = serial.Serial('/dev/tty0', 9600)
+        self.ser = serial.Serial(port, 9600)
 
     def send(self, message):
         """Function for sending data to Arduino"""
@@ -27,3 +27,6 @@ if __name__ == "__main__":
     while True:
         serial.send("TEST TEST TEST")
         sleep(2)
+
+        print(serial.read())
+        sleep(1)
