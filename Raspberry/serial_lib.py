@@ -6,7 +6,7 @@ class Serial:
 
     def __init__(self, port='/dev/ttyUSB0'):
         """Initialize serial variables"""
-        self.ser = serial.Serial('/dev/ttyUSB0', 9600)
+        self.ser = serial.Serial('/dev/tty0', 9600)
 
     def send(self, message):
         """Function for sending data to Arduino"""
