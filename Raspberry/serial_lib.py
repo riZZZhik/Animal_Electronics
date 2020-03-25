@@ -4,13 +4,13 @@ import serial
 class Serial:
     """Class for exchanging information between RaspBerry and Arduino"""
 
-    def __init__(self, port='/dev/ttyUSB0'):
+    def __init__(self, port='/dev/ttyACM0'):
         """Initialize serial variables"""
         self.ser = serial.Serial(port, 9600)
 
     def send(self, message):
         """Function for sending data to Arduino"""
-        self.ser.write(b"{message}")
+        self.ser.write(message.encode("utf-8"))
 
     def read(self):
         """Function for reading data from Arduino
