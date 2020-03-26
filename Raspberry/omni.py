@@ -1,9 +1,10 @@
 from math import atan2, cos, radians as rad
 
+
 class Omni:
     """Class for getting speeds for omni wheel platform"""
 
-    def __init__(self, x_width, aruco_height, Kx=1, Ky=1, Kd=1):
+    def __init__(self, x_width, aruco_height=0, Kx=1, Ky=1, Kd=1):
         """Initialize main variables.
         :param x_width: Width of frame
         :param aruco_height: Height of ARuco marker in start position
@@ -14,7 +15,7 @@ class Omni:
         """
         self.x_center = x_width / 2
         self.y_start = aruco_height
-        
+
         self.Kx = Kx
         self.Ky = Ky
         self.Kd = Kd

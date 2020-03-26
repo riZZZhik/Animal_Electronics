@@ -1,14 +1,19 @@
 import cv2 as cv
+
 from Raspberry import ARuco
 
 DEBUG = True
 
 if __name__ == "__main__":
+    # Image processing initializations #
     # Init ARuco module class
     AR = ARuco()
 
     # Init camera
     cap = cv.VideoCapture(0)
+
+    # Get first video frame
+    _, frame = cap.read()
 
     while True:
         ################################################################
@@ -26,9 +31,6 @@ if __name__ == "__main__":
             pos = AR.get_robot_pos()
 
             if DEBUG:
-                # Display robot position
-                cv.putText(frame, str(pos), (20, 30 * len(pos)), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv.LINE_AA)
-
                 # Display markers on video frame
                 frame = AR.show_aruco()
 

@@ -15,6 +15,7 @@ class ARuco:
 
         # Init values for ARuco detection
         self.detected_markers = {}
+        self.robot_state = {}
         self._aruco_dict = aruco.Dictionary_get(aruco_type)
         self._aruco_parameters = aruco.DetectorParameters_create()
 
@@ -60,13 +61,17 @@ class ARuco:
             cv.line(self.img, centre, orient_centre, (0, 255, 0), 3)
             cv.circle(self.img, centre, 1, (0, 0, 255), 6)
             cv.putText(self.img, str(key), (int(centre[0] + 20), int(centre[1])), font, 1, (0, 0, 255), 2, cv.LINE_AA)
+
+            if self.robot_state:
+                cv.putText(frame, str(self.robot_state), (20, 30 * len(key_list)), font, 1, (0, 0, 255), 2, cv.LINE_AA)
+
         return self.img
 
     def get_robot_pos(self):
         """Function to give the position of the robot (centre(x), centre(y), angle)
         :return: Dictionary of robots position
         """
-        robot_state = {}
+        self.robot_state = {}
         key_list = self.detected_markers.keys()
 
         for key in key_list:
@@ -79,9 +84,9 @@ class ARuco:
 
             angle = self._angle_calculate(pt1, pt2)
             
-            robot_state[key] = (int(centre[0]), int(centre[1]), angle)
+            self.robot_state[key] = (int(centre[0]), int(centre[1]), angle)
 
-        return robot_state
+        return self.robot_state
 
     @staticmethod
     def _angle_calculate(pt1, pt2):
