@@ -102,16 +102,6 @@ class ARuco:
         return centre, top_centre
 
     @staticmethod
-    def _distance_calculate(pt1, pt2):
-        """Function to calculate distance between two points
-        :param pt1: Position of first point (x, y)
-        :param pt2: Position of second point (x, y)
-        :return: distance between two points
-        """
-        dist = math.sqrt((pt2[0] - pt1[0]) ** 2 + (pt2[1] - pt1[1]) ** 2)
-        return dist
-
-    @staticmethod
     def _angle_calculate(pt1, pt2):
         """Function to calculate angle between two points in the range of 0-359
         :param pt1: Position of first point (x, y)
@@ -125,6 +115,16 @@ class ARuco:
         angle = int(math.degrees(math.atan2(y, x)))
         angle = angle_list[angle]
         return int(angle)
+
+    @staticmethod
+    def _distance_calculate(pt1, pt2):
+        """Function to calculate distance between two points
+        :param pt1: Position of first point (x, y)
+        :param pt2: Position of second point (x, y)
+        :return: distance between two points
+        """
+        dist = math.sqrt((pt2[0] - pt1[0]) ** 2 + (pt2[1] - pt1[1]) ** 2)
+        return dist
 
 
 if __name__ == "__main__":
