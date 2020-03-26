@@ -5,14 +5,19 @@ class Serial:
     """Class for exchanging information between RaspBerry and Arduino"""
 
     def __init__(self, port='/dev/ttyACM0'):
-        """Initialize serial variables"""
+        """Initialize serial variables
+        :param port: serial port number of Arduino"""
         self.ser = serial.Serial(port, 9600)
 
     def send(self, message):
-        """Function for sending data to Arduino"""
+        """Function for sending data to Arduino
+        :param message: string to send"""
         self.ser.write(message.encode("utf-8"))
 
     def send_speeds(self, speeds, angle):
+        """User function for sending speeds and angles to Arduino
+        :param speeds: list of speed for each motor
+        :param angle: robot angle in degrees"""
         speeds = [round(s + 255) for s in speeds]
         message = speeds + [angle]
         message = [str(m).zfill(3) for m in message]
@@ -35,7 +40,7 @@ if __name__ == "__main__":
     serial = Serial()
 
     while True:
-        serial.send("255 100 050 010 000")
+        serial.send_speeds([120, -200, 250, 0], 180)
         sleep(2)
 
         print(serial.read())

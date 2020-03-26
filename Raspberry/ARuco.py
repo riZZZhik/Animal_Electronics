@@ -114,7 +114,10 @@ if __name__ == "__main__":
         # Check if markers are detected
         if detected_markers:
             # Get robot position
-            print(AR.get_robot_pos())
+            pos = AR.get_robot_pos()
+
+            # Display robot position
+            cv.putText(frame, str(pos), (20, 30*len(pos)), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv.LINE_AA)
 
             # Display markers on video frame
             frame = AR.show_aruco()

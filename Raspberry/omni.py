@@ -22,7 +22,8 @@ class Omni:
     def decart_regulator(self, x, y):
         """Function for get speeds on wheels with decart system positions.
         :param x: Needed X position in decart system
-        :param y: Needed Y position in decart system"""
+        :param y: Needed Y position in decart system
+        """
         alpha = atan2(y, x)
 
         s1 = self.Kd * cos(alpha + rad(45)) * 255
@@ -35,17 +36,18 @@ class Omni:
     def ARuco_regulator(self, x_pos, y_height):
         """Function for get speeds on wheels with information from ARuco marker.
         :param x_pos: Current position of ARuco marker
-        :param y_height: Current height of ARuco marker"""
+        :param y_height: Current height of ARuco marker
+        """
         y_range = self.y_start - y_height
         f = y_range * self.Ky if y_range > 50 else 0
 
         x_range = (x_pos - self.x_center)
         h = x_range * self.Kx if x_range > 100 else 0
 
-        s1 =
-        s2 =
-        s3 =
-        s4 =
+        s1 = f + h
+        s2 = -f + h
+        s3 = -f + -h
+        s4 = f + -h
 
         return s1, s2, s3, s4
 
