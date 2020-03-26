@@ -1,4 +1,5 @@
 import cv2 as cv
+import time
 
 from Raspberry import ARuco
 from Raspberry import Omni
@@ -45,8 +46,18 @@ if __name__ == "__main__":
     # Init Serial module class
     serial = Serial()
 
+    ##### Waiting for signal to begin #####
+    while not serial.read():
+        time.sleep(0.5)
+
     ##### Main cycle loop #####
+    scene_running = False
+    start_time = time.time()
     while True:
+        # Exit after two minutes
+        if time.time() - start_time > 120:
+            break
+
         ################################################################
         ##########################Image processing######################
         ################################################################
@@ -55,11 +66,12 @@ if __name__ == "__main__":
 
         # Detect markers
         detected_markers = AR.detect_aruco(frame)
+        pos = {}
 
-        # Check if markers are detected
+        # Check if markers detected
         if detected_markers:
             # Get robot position
-            pos = AR.get_marker_pos()
+            pos = AR.get_marker_pos()[ROBOT_ID]
 
             if DEBUG:
                 # Display markers on video frame

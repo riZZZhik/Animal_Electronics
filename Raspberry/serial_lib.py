@@ -2,7 +2,7 @@ import serial
 
 
 class Serial:
-    """Class for exchanging information between RaspBerry and Arduino"""
+    """Class for exchanging information between Raspberry and Arduino"""
 
     def __init__(self, port='/dev/ttyACM0'):
         """Initialize serial variables

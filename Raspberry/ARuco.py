@@ -5,7 +5,7 @@ import cv2.aruco as aruco
 
 
 class ARuco:
-    """Class for detecting and working with ARuco markers on image"""
+    """Class for detecting ARuco markers on frame"""
 
     def __init__(self, aruco_type=aruco.DICT_4X4_250):
         """Initialize main variables of this class
@@ -63,14 +63,14 @@ class ARuco:
             cv.line(self.img, centre, top_centre, (0, 255, 0), 3)
             cv.circle(self.img, centre, 1, (0, 0, 255), 6)
             cv.putText(self.img, str(key), (int(centre[0] + 20), int(centre[1])), font, 1, (0, 0, 255), 2, cv.LINE_AA)
-            cv.putText(self.img, robot_pos_text % ((key,) + self.robot_pos[key]),
+            cv.putText(self.img, robot_pos_text % ((key,) + self.robot_pos[key].items()),
                        (20, 30 * len(key_list)), font, 1, (0, 0, 255), 2, cv.LINE_AA)
 
         return self.img
 
     def get_marker_pos(self):
         """Function to give the position of the robot (centre(x), centre(y), angle, height).
-        :return: Dictionary of robots position
+        :return: Dictionary of robots positions
         """
         self.robot_pos = {}
         key_list = self.detected_markers.keys()
@@ -85,7 +85,8 @@ class ARuco:
 
             height = self._distance_calculate(centre, top_centre)
 
-            self.robot_pos[key] = (int(centre[0]), int(centre[1]), angle, height)
+            self.robot_pos[key] = {"X": int(centre[0]), "Y": int(centre[1]),
+                                   "Angle": angle, "aruco_height": height}
 
         return self.robot_pos
 
