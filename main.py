@@ -5,7 +5,7 @@ from Raspberry import ARuco
 DEBUG = True
 
 if __name__ == "__main__":
-    # Image processing initializations #
+    ##### Image processing initializations #####
     # Init ARuco module class
     AR = ARuco()
 
@@ -15,6 +15,7 @@ if __name__ == "__main__":
     # Get first video frame
     _, frame = cap.read()
 
+    ##### Main cycle loop #####
     while True:
         ################################################################
         ##########################Image processing######################
@@ -28,7 +29,7 @@ if __name__ == "__main__":
         # Check if markers are detected
         if detected_markers:
             # Get robot position
-            pos = AR.get_robot_pos()
+            pos = AR.get_marker_pos()
 
             if DEBUG:
                 # Display markers on video frame
@@ -37,6 +38,9 @@ if __name__ == "__main__":
         if DEBUG:
             # Show result frame
             cv.imshow('image', frame)
+
+            if cv.waitKey(1) & 0xFF == ord('q'):
+                break
 
     cap.release()
     cv.destroyAllWindows()
