@@ -2,6 +2,7 @@ import cv2 as cv
 
 from Raspberry import ARuco
 
+ROBOT_ID = 0
 DEBUG = True
 
 if __name__ == "__main__":
@@ -12,8 +13,28 @@ if __name__ == "__main__":
     # Init camera
     cap = cv.VideoCapture(0)
 
-    # Get first video frame
-    _, frame = cap.read()
+    ##### Calibration #####
+    # Final values
+    frame_width, ARuco_height = 0, 0
+
+    # Calibration loop
+    while not ARuco_height:
+        # Get first video frame
+        _, frame = cap.read()
+
+        # Detect ARuco marker
+        detected_markers = AR.detect_aruco(frame)
+
+        # If detected markers
+        if detected_markers:
+            # Set frame width
+            frame_width = frame.shape[1]
+
+            # Get marker position
+            pos = AR.get_marker_pos()
+
+            # Set marker height
+            ARuco_height = pos[ROBOT_ID][3]
 
     ##### Main cycle loop #####
     while True:
