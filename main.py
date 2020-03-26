@@ -1,6 +1,8 @@
 import cv2 as cv
 
 from Raspberry import ARuco
+from Raspberry import Omni
+from Raspberry import Serial
 
 ROBOT_ID = 0
 DEBUG = True
@@ -35,6 +37,13 @@ if __name__ == "__main__":
 
             # Set marker height
             ARuco_height = pos[ROBOT_ID][3]
+
+    ##### Motors processing initializations #####
+    # Init Omni platform class
+    omni = Omni(frame_width, ARuco_height)
+
+    # Init Serial module class
+    serial = Serial()
 
     ##### Main cycle loop #####
     while True:
