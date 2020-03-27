@@ -4,6 +4,7 @@ import time
 from Raspberry import ARuco
 from Raspberry import Omni
 from Raspberry import Serial
+from Raspberry import Servo
 
 ROBOT_ID = 0
 DEBUG = True
@@ -45,6 +46,9 @@ if __name__ == "__main__":
 
     # Init Serial module class
     serial = Serial()
+
+    # Init Servo motors class
+    servo = Servo()
 
     ##### Waiting for signal to begin #####
     while not serial.read():
