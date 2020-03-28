@@ -32,16 +32,3 @@ class Serial:
             line = self.ser.readline()
             line = line.decode('utf-8')
             return line
-
-
-if __name__ == "__main__":
-    from time import sleep
-
-    serial = Serial()
-
-    while True:
-        serial.send_speeds([120, -200, 250, 0], 180)
-        sleep(2)
-
-        print(serial.read())
-        sleep(1)

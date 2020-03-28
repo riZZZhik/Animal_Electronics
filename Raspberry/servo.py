@@ -2,10 +2,10 @@ from adafruit_servokit import ServoKit
 
 
 class Servo:
-    """Class for handling servo motors"""
+    """Class for handling servo motors with servo driver"""
     def __init__(self, channels=16):
         """Initialize main variables of this class
-        :param channels: number of servo channels in ServoKit (8 or 16)
+        :param channels: number of channels on a servo driver (8 or 16)
         """
         self.kit = ServoKit(channels=channels)
 

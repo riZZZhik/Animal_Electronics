@@ -126,39 +126,3 @@ class ARuco:
         """
         dist = math.sqrt((pt2[0] - pt1[0]) ** 2 + (pt2[1] - pt1[1]) ** 2)
         return dist
-
-
-if __name__ == "__main__":
-    # Init ARuco class
-    AR = ARuco()
-
-    # Init camera
-    cap = cv.VideoCapture(0)
-
-    while True:
-        # Get current video frame
-        ret, frame = cap.read()
-
-        # Detect markers
-        detected_markers = AR.detect_aruco(frame)
-
-        # Check if markers are detected
-        if detected_markers:
-            # Get robot position
-            pos = AR.get_marker_pos()
-
-            # Display robot position
-            cv.putText(frame, str(pos), (20, 30 * len(pos)), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv.LINE_AA)
-
-            # Display markers on video frame
-            frame = AR.show_aruco()
-
-        # Show result frame
-        cv.imshow('image', frame)
-
-        # Exit if "q" is pressed
-        if cv.waitKey(1) & 0xFF == ord('q'):
-            break
-
-    cap.release()
-    cv.destroyAllWindows()
