@@ -86,7 +86,7 @@ class ARuco:
             height = self._distance_calculate(centre, top_centre)
 
             self.robot_pos[key] = {"X": int(centre[0]), "Y": int(centre[1]),
-                                   "Angle": angle, "aruco_height": height}
+                                   "Angle": angle, "ARuco_height": height}
 
         return self.robot_pos
 

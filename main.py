@@ -1,10 +1,7 @@
 import cv2 as cv
 import time
 
-from Raspberry import ARuco
-from Raspberry import Omni
-from Raspberry import Serial
-from Raspberry import Servo
+from Raspberry import *
 
 ROBOT_ID = 0
 DEBUG = True
@@ -30,7 +27,7 @@ if __name__ == "__main__":
         detected_markers = AR.detect_aruco(frame)
 
         # If detected markers
-        if detected_markers:
+        if detected_markers[ROBOT_ID]:
             # Set frame width
             frame_width = frame.shape[1]
 
@@ -38,11 +35,14 @@ if __name__ == "__main__":
             pos = AR.get_marker_pos()
 
             # Set marker height
-            ARuco_height = pos[ROBOT_ID][3]
+            ARuco_height = pos[ROBOT_ID]["ARuco_height"]
 
     ##### Motors processing initializations #####
     # Init Omni platform class
     omni = Omni(frame_width, ARuco_height)
+
+    # Init scenes class
+    scenes = Scenes()
 
     # Init Serial module class
     serial = Serial()
@@ -73,20 +73,34 @@ if __name__ == "__main__":
         pos = {}
 
         # Check if markers detected
-        if detected_markers:
+        if detected_markers[ROBOT_ID]:
             # Get robot position
             pos = AR.get_marker_pos()[ROBOT_ID]
 
-            if DEBUG:
-                # Display markers on video frame
-                frame = AR.show_aruco()
-
         if DEBUG:
+            # Display markers on video frame
+            frame = AR.show_aruco()
+
             # Show result frame
             cv.imshow('image', frame)
 
+            # Exit if "q" button pressed
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
+
+        ################################################################
+        #########################Scenes processing######################
+        ################################################################
+        scene_id = 0  # TODO: Code for listening audio channel
+        scenes.scene(scene_id)
+
+        ################################################################
+        #########################Motors processing######################
+        ################################################################
+        # Send speeds to motors if needed
+        if pos and scenes.scene_aruco:
+            speeds = omni.ARuco_regulator(pos["X"], pos["ARuco_height"])
+            serial.send_speeds(speeds, 0)
 
     cap.release()
     cv.destroyAllWindows()
