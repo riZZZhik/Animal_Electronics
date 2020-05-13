@@ -23,6 +23,15 @@ if __name__ == "__main__":
         # Get first video frame
         _, frame = cap.read()
 
+        # Show frame
+        if DEBUG:
+            # Show result frame
+            cv.imshow('image', frame)
+
+            # Exit if "q" button pressed
+            if cv.waitKey(1) & 0xFF == ord('q'):
+                break
+
         # Detect ARuco marker
         detected_markers = AR.detect_aruco(frame)
 
@@ -51,8 +60,8 @@ if __name__ == "__main__":
     servo = Servo()
 
     ##### Waiting for signal to begin #####
-    while not serial.read():
-        time.sleep(0.5)
+    # while not serial.read():
+    #     time.sleep(0.5)
 
     ##### Main cycle loop #####
     scene_running = False

@@ -43,8 +43,7 @@ class ARuco:
                 temp_2 = ids[k]
                 temp_2 = temp_2[0]
                 self.detected_markers[temp_2] = temp_1
-            return self.detected_markers
-        return {}
+        return self.detected_markers
 
     def show_aruco(self):
         """Function to display ARuco markers centre, direction and id
