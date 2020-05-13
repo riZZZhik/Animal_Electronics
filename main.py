@@ -27,7 +27,7 @@ if __name__ == "__main__":
         detected_markers = AR.detect_aruco(frame)
 
         # If detected markers
-        if detected_markers[ROBOT_ID]:
+        if ROBOT_ID in detected_markers.keys():
             # Set frame width
             frame_width = frame.shape[1]
 
