@@ -62,8 +62,8 @@ class ARuco:
 
             cv.line(self.img, centre, top_centre, (0, 255, 0), 3)
             cv.circle(self.img, centre, 1, (0, 0, 255), 6)
-            cv.putText(self.img, str(key), (int(centre[0] + 20), int(centre[1])), font, 1, (0, 0, 255), 2, cv.LINE_AA)
-            cv.putText(self.img, robot_pos_text % ((key,) + self.robot_pos[key].items()),
+            cv.putText(self.img, str(key), ( int(centre[0] + 20), int(centre[1])), font, 1, (0, 0, 255), 2, cv.LINE_AA)
+            cv.putText(self.img, robot_pos_text % ((key,) + tuple(self.robot_pos[key].items())),
                        (20, 30 * len(key_list)), font, 1, (0, 0, 255), 2, cv.LINE_AA)
 
         return self.img
