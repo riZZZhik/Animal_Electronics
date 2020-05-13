@@ -82,7 +82,7 @@ if __name__ == "__main__":
         pos = {}
 
         # Check if markers detected
-        if detected_markers[ROBOT_ID]:
+        if ROBOT_ID in detected_markers:
             # Get robot position
             pos = AR.get_marker_pos()[ROBOT_ID]
 
